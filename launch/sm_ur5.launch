@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<launch>
+<!--    <arg name="in_namespace" default="true"/>-->
+<!--    <arg name="namespace" default="ur5"/>-->
+    
+<!--    <group ns="ur5">-->
+<!--    <group if="$(arg in_namespace)">
+        <group ns="$(arg namespace)">
+
+            <rosparam command="load" file="$(find sm_ur5)/config/sm_ur5_config.yaml" />
+
+            <node pkg="sm_ur5" type="sm_ur5_node" name="sm_ur5" launch-prefix="xterm -xrm 'XTerm*scrollBar:  true' -xrm 'xterm*rightScrollBar: true' -sl 10000 -hold -e ">
+                <rosparam command="load" file="$(find multi_robot_control)/config/ur5/ur5_pick_and_place_parameters.yaml"/>
+                <rosparam command="load" file="$(find ur5_and_ur5e_moveit_config)/config/ur5/ur5_joint_names.yaml"/>
+            </node>
+                        <node pkg="smacc_runtime_test" name="smacc_runtime_test_node" type="smacc_runtime_test_node" output="screen">
+                        <rosparam file="$(find sm_ur5)/config/sm_ur5_test.yaml"/>
+
+            <node pkg="multi_robot_control" type="ur5_sm_cv_sim.py" name="ur5_sm_cv_sim"/>
+
+        </group>
+    </group>
+    -->
+        <rosparam command="load" file="$(find sm_ur5)/config/sm_ur5_config.yaml" />
+
+        <node pkg="sm_ur5" type="sm_ur5_node" name="sm_ur5" output="screen"> // launch-prefix="xterm -xrm 'XTerm*scrollBar:  true' -xrm 'xterm*rightScrollBar: true' -sl 10000 -hold -e ">
+            <rosparam command="load" file="$(find edi_robot_control)/config/multi_pick_and_place_parameters.yaml"/>
+            <rosparam command="load" file="$(find ur5_and_ur5e_moveit_config)/config/ur5/ur5_joint_names.yaml"/>
+            <rosparam command="load" file="$(find ur5_and_ur5e_moveit_config)/config/ur5e/ur5e_joint_names.yaml"/>
+            <!--
+            <remap from="/move_group" to="ur5/move_group" />
+            <remap from="/pickup" to="ur5/pickup" />
+            <remap from="/place" to="ur5/place" />
+            <remap from="/trajectory_execution_event" to="ur5/trajectory_execution_event" />
+            <remap from="/attached_collision_object" to="ur5/attached_collision_object" />
+            <remap from="/execute_trajectory" to="ur5/execute_trajectory" />
+            <remap from="/joint_states" to="ur5/joint_states" />
+            <remap from="/pick_and_place_marker" to="ur5/pick_and_place_marker" />
+            -->
+        </node>
+<!--        <node pkg="multi_robot_control" type="ur5_sm_cv_sim.py" name="ur5_sm_cv_sim" ns="ur5"/>-->
+
+
+</launch>

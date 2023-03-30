@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+
+    <rosparam command="load" file="$(find sm_cv)/config/sm_cv_config.yaml" />
+
+    <rosparam command="load" file="$(find sm_ur5)/config/sm_ur5_config.yaml" />
+
+    <node pkg="edi_robot_control" name="image_subscriber" type="image_subscriber.py" output="screen"/>
+
+    <node pkg="sm_ur5" type="sm_ur5_node" name="sm_ur5" output="screen"> // launch-prefix="xterm -xrm 'XTerm*scrollBar:  true' -xrm 'xterm*rightScrollBar: true' -sl 10000 -hold -e ">
+        <rosparam command="load" file="$(find edi_robot_control)/config/multi_pick_and_place_parameters.yaml"/>
+        <rosparam command="load" file="$(find ur5_and_ur5e_moveit_config)/config/ur5/ur5_joint_names.yaml"/>
+        <rosparam command="load" file="$(find ur5_and_ur5e_moveit_config)/config/ur5e/ur5e_joint_names.yaml"/>
+    </node>
+
+    <node pkg="sm_cv" type="sm_cv_node" name="sm_cv" launch-prefix="xterm -xrm 'XTerm*scrollBar:  true' -xrm 'xterm*rightScrollBar: true' -sl 10000 -hold -e ">
+
+        <rosparam command="load" file="$(find edi_robot_control)/config/multi_pick_and_place_parameters.yaml"/>
+        <rosparam command="load" file="$(find ur5_and_ur5e_moveit_config)/config/ur5/ur5_joint_names.yaml"/>
+        <rosparam command="load" file="$(find ur5_and_ur5e_moveit_config)/config/ur5e/ur5e_joint_names.yaml"/>
+    </node>
+
+</launch>

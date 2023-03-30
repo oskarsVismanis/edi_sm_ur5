@@ -1,0 +1,6 @@
+<launch>
+<include file="$(find sm_ur5)/launch/sm_ur5.launch"/>
+    <test pkg="smacc_runtime_test" test-name="smacc_runtime_test_node" type="smacc_runtime_test_node">
+        <rosparam file="$(find sm_ur5)/config/sm_ur5_test.yaml"/>
+    </test>
+</launch>
